@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <style>
+        html body {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .CenterRowFlex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .CenterColumnFlex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .devContainer {
+            width: 100%;
+            height: 100%;
+            background-color: goldenrod;
+        }
+
+        .devSearchHolder {
+            width: 80%;
+            height: 15%;
+            padding-top: 50px;
+        }
+
+        .devContentHolder {
+            width: 80%;
+            height: 60%;
+        }
+
+        .devSearchBar {
+            background-color: azure;
+            border-radius: 25px;
+            height: 30%;
+            width: 70%;
+            outline: none;
+            border: none;
+            font-size: 25px;
+
+            box-sizing: border-box;
+            padding: 0 50px;
+            overflow: hidden;
+        }
+
+        .buttonHolder {
+            padding-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            background-color: rgba(240, 255, 255, 0.80);
+            box-sizing: border-box;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="CenterColumnFlex devContainer">
+    <div class="CenterRowFlex devSearchHolder">
+        <form class="CenterRowFlex" style="width: 100%; height: 100%;" method="POST" action="/studentSearch/">
+            {% csrf_token %}
+        <label class="CenterRowFlex" style="width: 100%; height: 100%;">
+            <input name="query" class="devSearchBar" placeholder="Search Students">
+            <input type="submit" hidden>
+        </label>
+        </form>
+    </div>
+    <div class="CenterRowFlex devContentHolder">
+        <div class="CenterColumnFlex" style="width: 70%; height: 80%;">
+            <div style="width: 100%; font-size: 18px;">
+                    Your jobs:
+            </div>
+            <div style="display: flex; flex-direction: column; width: 100%; height: 60%; overflow: auto;">
+                {% for job in jobs %}
+                    <div style="height: 40px; min-height: 40px; width: 100%;">
+                        <textarea onclick="viewJob({{ job.id }})" readonly style="cursor: pointer; resize: none; height: 100%; width: 100%; margin: 0; padding: 0; box-sizing: border-box; font-size: 17px; background-color: rgba(240, 255, 255, 0.80);">{{ job.title }}</textarea>
+                    </div>
+                    <div style="display: block; min-height: 10px; height: 10px;"></div>
+                {% endfor %}
+            </div>
+            <div class="CenterRowFlex buttonHolder">
+                <button class="button"> <a href="/job">Add</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function viewJob(jobID){
+        var form = document.createElement('form');
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/jobEdit/");
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'csrfmiddlewaretoken';
+        input.value = '{{ csrf_token }}';
+        form.appendChild(input);
+        document.body.appendChild(form);
+        var job = document.createElement('input');
+        job.type = 'hidden';
+        job.name = 'jobID';
+        job.value = jobID;
+        form.appendChild(job)
+        form.submit();
+    }
+</script>
+</body>
+</html>

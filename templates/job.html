@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Job</title>
+    <style>
+        html body {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .CenterRowFlex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .CenterColumnFlex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .devContainer {
+            width: 100%;
+            height: 100%;
+            background-color: goldenrod;
+        }
+
+        .devContentHolder {
+            width: 80%;
+            height: 80%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="CenterColumnFlex devContainer">
+    <div class="CenterRowFlex devContentHolder">
+        <div style="width: 70%; height: 80%;">
+            <div class="CenterColumnFlex" style="width: 100%; height: 85%; justify-content: flex-end;">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div style="width: 100%; font-size: 18px;">
+                        Title (max 200 characters):
+                    </div>
+                    <textarea class="form-control" name="title" rows="2" cols="100" style="font-size: 17px;"></textarea>
+                    <div style="width: 100%; font-size: 18px;">
+                        Description (max 2000 characters):
+                    </div>
+                    <textarea class="form-control" name="description" rows="20" cols="100" style="font-size: 17px;"></textarea>
+                    <div style="width: 100%; font-size: 18px;">
+                        Mode of communication (max 200 characters):
+                    </div>
+                    <textarea class="form-control" name="mode_of_communication" rows="2" cols="100" style="font-size: 17px;"></textarea>
+                    <div style="float: right; width: 83pt;">
+                        <input class="btn login_btn" type="submit" value="Create Job">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

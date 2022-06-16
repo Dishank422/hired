@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+    <style>
+        html body {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .CenterRowFlex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .CenterColumnFlex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .devContainer {
+            width: 100%;
+            height: 100%;
+            background-color: goldenrod;
+        }
+
+        .devContentHolder {
+            width: 80%;
+            height: 80%;
+        }
+
+        .devDataHolder {
+            background-color: rgba(240, 255, 255, 0.80);
+            border: 1px black solid;
+            border-radius: 5px;
+            height: 50px;
+            width: 45%;
+        }
+
+        .text {
+            font-size: 17px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="CenterColumnFlex devContainer">
+    <div class="CenterRowFlex devContentHolder">
+        <div style="width: 70%; height: 80%;">
+            <div class="CenterRowFlex" style="justify-content: space-between; height: 15%">
+                <div class="CenterRowFlex devDataHolder">
+                    <div class="CenterRowFlex" style="text-align: center; width: 20%;">Name:&nbsp;</div>
+                    <div class="CenterRowFlex" style="text-align: center; width: 80%;">{{ user.first_name}} {{ user.last_name }}</div>
+                </div>
+                <div class="CenterRowFlex devDataHolder">
+                    <div class="CenterRowFlex" style="text-align: center; width: 20%;">Email:&nbsp;</div>
+                    <div class="CenterRowFlex" style="text-align: center; width: 80%;">{{ user.username }}</div>
+                </div>
+            </div>
+            <div class="CenterColumnFlex" style="width: 100%; height: 85%; justify-content: flex-end;">
+                <div style="width: 100%; font-size: 18px;">
+                    Experience (max 2000 characters):
+                </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <textarea class="form-control" name="profile" rows="20" cols="100" style="font-size: 17px;">
+                        {{ profile }}
+                    </textarea>
+                    <div style="float: right; width: 70pt;">
+                        <input class="btn login_btn" type="submit" value="Update">
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
