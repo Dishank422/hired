@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,6 +86,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -134,3 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True     # optional, as this will log you out when browser is closed
 SESSION_COOKIE_AGE = 300
 SESSION_SAVE_EVERY_REQUEST = True          # Will prevent from logging you out after 300 seconds
+
+CSRF_TRUSTED_ORIGINS = ['https://hiredfromiith.herokuapp.com']
